@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>🔥 Streak Parlor</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#ffd6ea;
+    text-align:center;
+}
+
+.box{
+    background:white;
+    max-width:500px;
+    margin:auto;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 0 15px pink;
+}
+
+button{
+    background:#ff7eb9;
+    color:white;
+    border:none;
+    padding:10px;
+    margin:5px;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.friend{
+    background:#ffeaf4;
+    padding:10px;
+    margin:10px;
+    border-radius:15px;
+}
+
+img{
+    max-width:250px;
+    border-radius:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔥💕 Streak Parlor 💕🔥</h1>
+
+<div class="box">
+
+<h2>Add Friend</h2>
+
+<input id="friendName"
+placeholder="Friend name">
+
+<button onclick="addFriend()">
+➕ Add Friend
+</button>
+
+<div id="friends"></div>
+
+<hr>
+
+<h2>Send a Picture</h2>
+
+<input
+type="file"
+accept="image/*"
+id="photoInput">
+
+<br><br>
+
+<button onclick="sendPhoto()">
+📸 Send Streak
+</button>
+
+<div id="photoArea"></div>
+
+</div>
+
+<script>
+
+let streak = 0;
+
+function addFriend(){
+
+    let name =
+    document.getElementById("friendName").value;
+
+    if(name==="") return;
+
+    let div =
+    document.createElement("div");
+
+    div.className="friend";
+
+    let name =
+    document.getElementById("friendName").value;
+
+    if(name === "") return;
+
+    let request =
+    document.createElement("div");
+
+    request.className = "friend";
+
+    request.innerHTML = `
+        💌 ${name} wants to be friends!
+        <br><br>
+        <button onclick="acceptRequest(this, '${name}')">
+        ✅ Accept
+        </button>
+
+        <button onclick="declineRequest(this)">
+        ❌ Decline
+        </button>
+    `;
+
+    document.getElementById("requests")
+    .appendChild(request);
+
+    document.getElementById("friendName").value="";
+}function acceptRequest(button, name){
+
+    let card =
+    button.parentElement;
+
+    card.remove();
+
+    let friend =
+    document.createElement("div");
+
+    friend.className = "friend";
+
+    friend.innerHTML =
+    "💖 " + name +
+    " | 🔥 Streak: 0";
+
+    document.getElementById("friends")
+    .appendChild(friend);
+}
+
+function declineRequest(button){
+    button.parentElement.remove();
+}
+
+function sendPhoto(){
+
+    let file =
+    document.getElementById("photoInput")
+    .files[0];
+
+    if(!file) return;
+
+    let reader =
+    new FileReader();
+
+    reader.onload=function(e){
+
+        streak++;
+
+        document.getElementById("photoArea")
+        .innerHTML=
+        `
+        <h3>📸 Streak Sent!</h3>
+        <img src="${e.target.result}">
+        <p>🔥 Current Streak: ${streak}</p>
+        `;
+    };
+
+    reader.readAsDataURL(file);
+}
+
+</script>
+
+</body>
+</html>

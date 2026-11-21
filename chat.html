@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artsy Friends Chat</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        #chat { border: 1px solid #ccc; height: 300px; padding: 10px; overflow-y: auto; }
+        input { width: 80%; padding: 8px; }
+        button { padding: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Artsy Friends Chat</h1>
+
+    <div id="chat"></div>
+    <br>
+
+    <input id="message" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function sendMessage() {
+            const msg = document.getElementById("message").value;
+            const chat = document.getElementById("chat");
+
+            if (msg.trim() !== "") {
+                chat.innerHTML += "<p>" + msg + "</p>";
+                document.getElementById("message").value = "";
+            }
+        }
+    </script>
+</body>
+</html>

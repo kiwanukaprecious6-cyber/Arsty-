@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>💌 Confession Booth</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#ffd6ea;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    color:#ff4f9a;
+}
+
+textarea{
+    width:300px;
+    height:80px;
+    border-radius:15px;
+    padding:10px;
+}
+
+button{
+    background:#ff87b5;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:15px;
+    cursor:pointer;
+}
+
+.post{
+    background:white;
+    max-width:400px;
+    margin:15px auto;
+    padding:15px;
+    border-radius:20px;
+    box-shadow:0 0 10px pink;
+}
+
+.comment{
+    margin-top:10px;
+    padding:5px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>💌 Cute Confession Booth 💌</h1>
+
+<textarea id="confession"
+placeholder="Write your confession..."></textarea>
+
+<br><br>
+
+<button onclick="addPost()">Post Confession</button>
+
+<div id="posts"></div>
+
+<script>
+function addPost(){
+
+    let text =
+    document.getElementById("confession").value;
+
+    if(text.trim() === "") return;
+
+    let post = document.createElement("div");
+    post.className = "post";
+
+    post.innerHTML =
+    `
+    <p>${text}</p>
+    <button onclick="likePost(this)">❤️ 0</button>
+
+    <br><br>
+
+    <input placeholder="Write a comment...">
+
+    <button onclick="addComment(this)">
+    💬 Comment
+    </button>
+
+    <div class="comments"></div>
+    `;
+
+    document.getElementById("posts")
+    .prepend(post);
+
+    document.getElementById("confession").value="";
+}
+
+function likePost(button){
+    let count =
+    parseInt(button.innerText.split(" ")[1]);
+
+    count++;
+
+    button.innerText = "❤️ " + count;
+}
+
+function addComment(button){
+
+    let input =
+    button.previousElementSibling;
+
+    let comments =
+    button.nextElementSibling;
+
+    if(input.value.trim() === "") return;
+
+    let p = document.createElement("p");
+    p.className = "comment";
+    p.innerText = "💬 " + input.value;
+
+    comments.appendChild(p);
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>

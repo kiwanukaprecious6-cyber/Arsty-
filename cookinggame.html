@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🍓 Pink Café</title>
+    <style>
+        body{
+            background:#ffd6ea;
+            font-family:Comic Sans MS, Arial;
+            text-align:center;
+            color:#ff4f9a;
+        }
+
+        .box{
+            background:white;
+            width:350px;
+            margin:auto;
+            padding:20px;
+            border-radius:20px;
+            box-shadow:0 0 15px pink;
+        }
+
+        button{
+            background:#ff87b5;
+            border:none;
+            color:white;
+            padding:10px;
+            margin:5px;
+            border-radius:15px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#ff5f9e;
+        }
+
+        #food{
+            font-size:50px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🍰 Cute Pink Café 🍰</h1>
+
+<div class="box">
+    <h2>💰 Money: $<span id="money">0</span></h2>
+
+    <p id="customer">Customer wants a surprise!</p>
+
+    <div id="food">🍽️</div>
+
+    <h3>Choose Ingredients</h3>
+
+    <button onclick="add('🍓')">Strawberry</button>
+    <button onclick="add('🍫')">Chocolate</button>
+    <button onclick="add('🧁')">Cupcake</button>
+    <button onclick="add('🍪')">Cookie</button>
+    <button onclick="add('🍒')">Cherry</button>
+
+    <br><br>
+
+    <button onclick="serve()">✨ Serve Customer ✨</button>
+
+    <p id="dish"></p>
+</div>
+
+<script>
+let money = 0;
+let dish = "";
+
+function add(item){
+    dish += item;
+    document.getElementById("dish").innerHTML =
+        "Recipe: " + dish;
+}
+
+function serve(){document.getElementById("money").textContent = money;
+
+    document.getElementById("food").innerHTML = "🎉";
+
+    document.getElementById("customer").innerHTML =
+        "😍 Customer loved it! Paid $" + pay + " 💖";
+
+    setTimeout(() => {
+        document.getElementById("food").innerHTML = "🍽️";
+    }, 1500);
+
+    dish = "";
+    document.getElementById("dish").innerHTML = "";
+}
+
+    if(dish === ""){
+        alert("Make something first!");
+        return;
+    }
+
+    let pay = Math.floor(Math.random()*50)+10;
+
+    money += pay;
+
+    document.getElementById("money").textContent = money;
+
+    document.getElementById("customer").innerHTML =
+        "😍 Customer loved it! Paid $" + pay;
+
+    dish = "";
+    document.getElementById("dish").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
